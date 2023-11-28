@@ -94,8 +94,6 @@ header{
 }
 
 .titre {
-    border-bottom: solid;
-    border-color: black;
     padding: 5px;
     padding-left: 8px;
 }
@@ -109,8 +107,25 @@ header{
    padding-left: 8px;
 }
 
+section{
+    border: solid;
+    border-width: 2px;
+    margin: 4px;
+    margin-top: 15px;
+    padding: 5px;
+}
+
 #contact_p{
     font-size: 15px;
     display: flex;
     align-items:center;
+}
+
+hr{
+    width: 99%;
+    height: 0.1px;
+    border-color: black;
+    background-color: black;
+    border-radius: 15px;
+    border: solid;
 }
