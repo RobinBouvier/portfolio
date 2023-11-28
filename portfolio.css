@@ -46,11 +46,27 @@ li{
     color 0.3s;
 }
 
-.nav:hover, .contact_lien:hover{
+.nav:hover{
     border: solid;
     border-color: white;
     background-color: white;
     color: rgb(46, 44, 44);
+    border-width: 2px ;
+    border-radius: 20px;
+    padding: 7px;
+    margin: 5px;
+    text-decoration: none;
+    transition: 
+    background-color 0.3s, 
+    border-color 0.3s,
+    color 0.3s;
+}
+
+.contact_lien:hover{
+    border: solid;
+    border-color: rgb(64, 63, 63);
+    background-color: rgb(64, 63, 63);
+    color: white;
     border-width: 2px ;
     border-radius: 20px;
     padding: 7px;
