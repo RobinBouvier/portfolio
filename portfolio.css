@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 
 html{
     font-family: "Poppins", sans-serif;
@@ -7,21 +12,20 @@ html{
     background-color: rgb(225, 217, 217);
 }
 
-ul{
-    list-style-type: none;
-}
 
 .navbar{
     text-align: center;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     background-color: rgb(46, 44, 44);
+    list-style-type: none;
+    padding: 16px;
 }
 
 li{
     display: inline;
+    list-style-type: disc;
 }
 
 .nav{
@@ -79,7 +83,7 @@ li{
 }
 
 header{
-    padding-top: 50px;
+    padding-top: 15px;
     padding-left: 8px;
 }
 
@@ -115,6 +119,10 @@ section{
     padding: 5px;
 }
 
+#first{
+    margin-top: 90px;
+}
+
 #contact_p{
     font-size: 15px;
     display: flex;
@@ -128,4 +136,10 @@ hr{
     background-color: black;
     border-radius: 15px;
     border: solid;
+}
+
+p{
+    margin: 5px;
+    margin-top: 15px;  
+    margin-bottom: 15px; 
 }
