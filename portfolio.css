@@ -3,6 +3,7 @@
 *{
     margin: 0px;
     padding: 0px;
+
 }
 
 
@@ -25,7 +26,11 @@ html{
 
 li{
     display: inline;
-    list-style-type: disc;
+    padding-top: 5px;
+}
+
+ul{
+    padding-left: 0px;
 }
 
 .nav{
@@ -142,4 +147,26 @@ p{
     margin: 5px;
     margin-top: 15px;  
     margin-bottom: 15px; 
+}
+
+.detail{
+    padding-left: 20px;
+}
+
+h2{
+    padding-left: 7px;
+}
+
+progress{
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+progress::-webkit-progress-value{
+    background-color: rgb(55, 58, 66);
+}
+
+progress::-webkit-progress-bar{
+    background-color: whitesmoke;
 }
