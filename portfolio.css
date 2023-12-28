@@ -131,7 +131,7 @@ section{
 #contact_p{
     font-size: 15px;
     display: flex;
-    align-items:center;
+    align-items: center;
 }
 
 hr{
@@ -228,4 +228,77 @@ h3{
     background-color 0.3s, 
     border-color 0.3s,
     color 0.3s;
+}
+
+.expProDiv{
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(58, 55, 55);
+    margin: 7px;
+    margin-top: 10px;
+    border-radius: 15px;
+    padding-bottom: 5px;
+}
+
+#gel43{
+    width: auto;
+    height: auto;
+    max-width: 400px;
+    max-height: 210px;
+    float: right;
+    padding: 8px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+}
+
+.divers_lien{
+    display: inline;
+    border: solid;
+    border-color: rgba(255, 255, 255, 0);
+    border-width: 1px ;
+    border-radius: 20px;
+    padding: 2px;
+    text-decoration: none;
+    color: black;
+    transition: 
+    background-color 0.3s, 
+    border-color 0.3s,
+    color 0.3s;
+}
+
+.divers_lien:hover{
+    border: solid;
+    border-color: rgb(64, 63, 63);
+    background-color: rgb(64, 63, 63);
+    color: white;
+    border-width: 1px ;
+    border-radius: 20px;
+    padding: 2px;
+    text-decoration: none;
+    transition: 
+    background-color 0.3s, 
+    border-color 0.3s,
+    color 0.3s;
+}
+
+.texteDivers{
+    padding: 8px;
+    padding-top: 3px;
+}
+
+.texteDiversImage{
+    padding: 8px;
+    padding-top: 3px;
+    background-color: red;
+}
+
+#kingdom_of_desire{
+    width: auto;
+    height: auto;
+    max-width: 400px;
+    max-height: 210px;
+    float: right;
+    padding: 8px;
+    border-radius: 15px;
+    margin-bottom: 5px;
 }
