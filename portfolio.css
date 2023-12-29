@@ -284,13 +284,11 @@ h3{
 .texteDivers{
     padding: 8px;
     padding-top: 3px;
+    padding-bottom: 3px;
+    display: inline-block;
+    margin-bottom: 8px;
 }
 
-.texteDiversImage{
-    padding: 8px;
-    padding-top: 3px;
-    background-color: red;
-}
 
 #kingdom_of_desire{
     width: auto;
