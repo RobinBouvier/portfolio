@@ -3,7 +3,6 @@
 *{
     margin: 0px;
     padding: 0px;
-
 }
 
 
@@ -121,6 +120,7 @@ section{
     border-width: 2px;
     margin: 4px;
     margin-top: 15px;
+    margin-right: 0px;
     padding: 5px;
 }
 
@@ -191,7 +191,7 @@ h3{
     padding-top: 0px;
 }
 
-.titreQualites{
+.texteQualites{
     padding: 3px;
     padding-top: 5px;
 }
@@ -299,4 +299,31 @@ h3{
     padding: 8px;
     border-radius: 15px;
     margin-bottom: 5px;
+}
+
+.divProjet{
+    border-color: black;
+    border: solid;
+    border-width: 2px;
+    border-radius: 15px;
+    padding: 5px;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.titreProjet{
+    font-size: 20px;
+    text-decoration: none;
+    padding-top: 0px;
+}
+
+.lienProjet, .infoProjet{
+    border-radius: 15px;
+    background-color: rgb(51, 49, 49);
+    padding: 5px;
+    padding-inline-start: 9px;
+    padding-inline-end: 9px;
+    display: inline;
+    margin: 5px;
+    color: rgb(225, 217, 217);
 }
