@@ -33,6 +33,7 @@ a{
     border-radius: 15px;
     display: inline-block;
     margin: 10px;
+    text-align: center;
 }
 
 .blocInfoTexte{
@@ -44,6 +45,7 @@ a{
 }
 
 button{
+    text-align: center;
     border: solid;
     border-radius: 15px;
     padding: 5px;
@@ -55,6 +57,7 @@ button{
 }
 
 button:hover{
+    text-align: center;
     border: solid;
     border-radius: 15px;
     padding: 5px;
