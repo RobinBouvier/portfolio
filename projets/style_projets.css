@@ -73,5 +73,6 @@ h2{
 }
 
 .texteDetails{
-    padding-left: 10px
+    padding-left: 10px;
+    padding-right: 10px;
 }
