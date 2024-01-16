@@ -119,9 +119,9 @@ section{
     border: solid;
     border-width: 2px;
     margin: 4px;
-    margin-top: 15px;
+    margin-top: 50px;
     margin-right: 0px;
-    padding: 5px;
+    padding: 15px;
 }
 
 #first{
@@ -238,6 +238,7 @@ h3{
     margin-top: 10px;
     border-radius: 15px;
     padding-bottom: 5px;
+    padding: 10px;
 }
 
 #gel43{
@@ -289,7 +290,6 @@ h3{
     margin-bottom: 8px;
 }
 
-
 #kingdom_of_desire{
     width: auto;
     height: auto;
@@ -299,6 +299,12 @@ h3{
     padding: 8px;
     border-radius: 15px;
     margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+#kingdom_of_desire:hover{
+    transform: scale(1.3);
+    transition: all 0.3s ease-in-out;
 }
 
 .divProjet{
@@ -333,4 +339,21 @@ h3{
     text-align: center;
     display: grid;
 
+}
+
+.afficheDivers{
+    width: 230px;
+    height: 300px;
+    margin: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.afficheDivers:hover{
+    transform: scale(1.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.afficheDiversDiv{
+    display: block;
+    text-align: center;
 }
