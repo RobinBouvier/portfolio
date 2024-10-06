@@ -1,0 +1,23 @@
+.album{
+    height: 300px;
+    width: 300px;
+}
+
+.afficheDivers {
+    width: 230px;
+    height: 300px;
+    margin: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.afficheDivers:hover {
+    width: 250px;
+    height: 320px;
+    margin: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+
+.afficheDiversDiv {
+    display: block;
+    text-align: center;
+}

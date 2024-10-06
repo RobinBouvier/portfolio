@@ -1,0 +1,132 @@
+.navbar {
+    top: 0; /* La positionner en haut de la page */
+    margin-top: 20px;
+    width: 100%; /* Faire en sorte qu'elle occupe toute la largeur */
+    z-index: 1000; /* La placer au-dessus des autres éléments */
+}
+
+/* Style des éléments de la navbar */
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar li {
+    float: left;
+}
+
+a{
+    text-decoration: none;
+}
+.navbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden; /* Masquer le pseudo-élément à l'extérieur du lien */
+    transition: border-radius 0.3s ease;
+}
+
+/* Pseudo-élément qui contiendra le dégradé */
+.navbar li a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    border-radius: 30px;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    opacity: 0; /* Cacher le pseudo-élément par défaut */
+}
+
+.navbar li a:hover::before {
+    opacity: 1; /* Montrer le dégradé au hover */
+}
+
+.navbar li a:hover {
+    border-radius: 30px;
+}
+
+/* Ajout de marge pour éviter que le contenu soit caché sous la navbar */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#nom{
+    display: inline-block;
+    font-size: 100px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+#but_rt{
+    display: inline-block;
+    font-size: 25px;
+    margin-left: 50px;
+}
+
+#photo_moi{
+    border-radius: 20px;
+    display: flex;
+    width: 325px;
+    height: 350px;
+    float: right;
+    margin-right: 400px;
+    margin-top: 25px;
+}
+
+.titre{
+    font-size: 50px;
+    margin-left: 50px;
+}
+
+.texte{
+    font-size: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.bloc_texte{
+    border-radius: 12px;
+    border: solid;
+    border-color: black;
+    border-width: 2px;
+    margin: 50px;
+    padding-bottom: 25px;
+}
+
+#photo_gel{
+    display: flex;
+    width: 300px;
+    height: 200px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    float: right;
+    margin-top: 25px;
+}
+
+.titre_bloc{
+    display: inline-block;
+    margin-left: 50px;
+}
+
+.icone {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    max-width: 50px;
+    max-height: 50px;
+    padding-left: 8px;
+}
