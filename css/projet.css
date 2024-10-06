@@ -282,3 +282,8 @@ p{
     height: 40px;
     margin: 5px;
 }
+
+video{
+    width: 100%;
+    height: auto;
+}

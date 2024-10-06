@@ -11,7 +11,7 @@
     function charge_emo($taille){
         // Connexion à la base de données
         try{ 
-            $connexion = new PDO('mysql:dbname=emoticon; host:localhost;', "robin", "maiscestfoucaquandmeme");
+            $connexion = new PDO('mysql:dbname=yourdbname; host:localhost;', "yourname", "yourpassword");
         }
         catch(Exception $erreur){
             exit("Erreur : " . $erreur->getMessage());
