@@ -1,0 +1,82 @@
+.content {
+    padding-top: 20px; /* Pour compenser la hauteur de la navbar fixe */
+}
+
+section {
+    padding: 60px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 220%;
+}
+
+li{
+    margin: 0;
+    padding: 0;
+}
+
+ol {
+    list-style-type: decimal; /* Ceci assure que les éléments de la liste sont numérotés */
+    padding-left: 40px; /* Ajoute de l'espace à gauche pour que les numéros ne soient pas cachés */
+}
+
+
+.commandes{
+    display: inline-block;
+    background-color: lightgrey;
+    border-radius: 25px;
+    padding: 1%;
+    margin: 0.2%;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    font-family: monospace;
+    font-size: 110%;
+    padding-right: 20%;
+}
+
+.sommaire_container{
+    display: inline-block;
+    background-color: #f9f9f9;
+    border-radius: 25px;
+    padding: 1%;
+    margin: 0.2%;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    font-size: 110%;
+    padding-right: 20%;
+    margin-top: 60px;
+}
+
+.sommaire_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    background: #6bd5f5;
+    border-radius: 25px;
+}
+
+.sommaire_element{
+    color: black;
+}
+
+.sommaire_element:visited{
+    color: black;
+}
+
+.sommaire_element:hover{
+    color: #6bd5f5;
+
+}
+
+.sommaire_element:visited:hover{
+    color: #6bd5f5;
+}
+
+.a_intext{
+    text-decoration: none;
+    color: blue
+}

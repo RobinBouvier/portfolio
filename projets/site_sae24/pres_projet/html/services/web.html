@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>Web / Base de données</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="dhcp.html">DHCP</a></li>
+                    <li><a href="dns.html">DNS</a></li>
+                    <li><a href="web.html">Web / Base de donnée</a></li>
+                    <li><a href="phone.html">Téléphonie</a></li>
+                    <li><a href="ftp.html">FTP</a></li>
+                    <li><a href="mail.html">Mail</a></li>
+                    <li><a href="sauve.html">Sauvegarde</a></li>
+                    <li><a href="active_directory.html">Active Directory</a></li>
+                    <li><a href="ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#intro">Introduction</a></li><br>
+                <li><a class="sommaire_element" href="#bdd">Base de données</a></li><br>
+                <li><a class="sommaire_element" href="#projet">Site de présentation du projet</a></li><br>
+                <li><a class="sommaire_element" href="#ticket">Site de la plateforme de tickets</a></li><br>
+                <li><a class="sommaire_element" href="#logs">Site de logs</a></li><br>
+            </ul>
+        </p>
+    </div>
+    <div class="content">
+        <section id="presentation">
+            <h1>Mise en place d'un serveur web avec bases de données</h1>
+
+            <h2 id="intro">Introduction</h2>
+            <p>Dans le cadre de la SAE24 nous avons fait différents sites web, un statique pour présenter le projet, un dynamique qui sert de plateforme de ticket et un dernier permettant d'analyser les logs. </p>
+
+            <h2 id="bdd">Base de données</h2>
+            <p>Pour la base de donnée, nous avons choisi de prendre la SGBD MariaDB.</p>
+
+            <h2 id="projet">Site de présentation du projet</h2>
+            <p>Nous sommes tout d'abord accueilli par une page qui permet de choisir entre les trois sites :</p>
+            <img src="../../images/web1.png">
+
+            <p>Nous pouvons alors aller sur le site de présentation du projet au milieu pour explorer le site sur lequel vous êtes actuellement :</p>
+            <img src="../../images/web5.png">
+
+            <h2 id="ticket">Site de la plateforme de tickets</h2>
+            <p>Ce site permet à nos clients de se connecter ou de se créer un compte, de créer un ticket ou bien de voir ses tickets.</p>
+            <img src="../../images/web2.png">
+            <img src="../../images/web3.png">
+
+            <h2 id="logs">Site de logs</h2>
+            <p>Ce dernier site permet de regarder et d'analyser les logs du serveur DHCP pour voir les adresses MAC non reconnu par le serveur.</p>
+            <img src="../../images/web4.png">
+        </section>
+    </div>
+</body>
+</html>

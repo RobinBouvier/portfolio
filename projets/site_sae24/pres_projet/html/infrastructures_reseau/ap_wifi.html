@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>AP WiFi</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../presentation.html">Presentation</a></li>
+            <li class="dropdown">
+                <a href="#">Network Infrastructure</a>
+                <ul class="dropdown-menu">
+                    <li><a href="switch.html">Switch</a></li>
+                    <li><a href="routeur.html">Router</a></li>
+                    <li><a href="parefeu.html">Firewall</a></li>
+                    <li><a href="ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../services/dhcp.html">DHCP</a></li>
+                    <li><a href="../services/dns.html">DNS</a></li>
+                    <li><a href="../services/web.html">Web / Database</a></li>
+                    <li><a href="../services/phone.html">Telephony</a></li>
+                    <li><a href="../services/ftp.html">FTP</a></li>
+                    <li><a href="../services/mail.html">Mail</a></li>
+                    <li><a href="../services/sauve.html">Backup</a></li>
+                    <li><a href="../services/active_directory.html">Active Directory</a></li>
+                    <li><a href="../services/ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Organization</a></li>
+            <li class="dropdown">
+                <a href="#">Security</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="sommaire_container">
+        <p class="sommaire_title">Summary</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#config_ip">AP IP Configuration</a></li><br>
+                <li><a class="sommaire_element" href="#config_dhcp">AP DHCP Configuration</a></li><br>
+            </ul>
+        </p>
+    </div>
+    <div class="content">
+        <section id="presentation">
+            <h1>Installation of a WiFi AP</h1>
+
+            <h2 id="config_ip">AP IP Configuration</h2>
+            <p>
+                We insert the AP into the network by assigning it a static IP address corresponding to its VLAN.<br><br>
+
+                <div class="commandes">
+                    <img src="../../images/ap.png">
+                </div><br><br>
+            </p>
+
+            <h2 id="config_dhcp">AP DHCP Configuration</h2>
+            <p>
+                For practicality, we use the AP's DHCP service to assign IP addresses to clients.<br><br>
+
+                <div class="commandes">
+                    <img src="../../images/ap.png">
+                </div><br><br>
+            </p>
+        </section>
+    </div>
+</body>
+</html>

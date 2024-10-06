@@ -1,0 +1,37 @@
+h1,h2 {
+    text-align: center;
+}
+h1 {
+    color: darkgray;
+}
+h2 {
+    color: darkcyan;
+}
+
+form {
+    text-align: center;
+}
+td > input { /* cases du plateau uniquement */
+    padding: 0;
+    min-width: 80px;
+    height: 80px;
+    margin: 0;
+    background-color: darkgreen;
+    font-size: 50px;
+}
+
+form > input[type="submit"] { /* Bouton uniquement */
+    display: block;
+    padding: 10px;
+    margin: 10px auto;
+    font-size: 14px;
+ }
+ table {
+    margin: auto;
+    border-collapse: collapse;
+    border: solid 3px black;
+}
+td {
+    border: solid 1px darkgray;
+    padding: 0;
+}

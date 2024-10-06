@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <link rel="stylesheet" href="../../css/image.css"/>
+    <title>Active directory</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="dhcp.html">DHCP</a></li>
+                    <li><a href="dns.html">DNS</a></li>
+                    <li><a href="web.html">Web / Base de donnée</a></li>
+                    <li><a href="phone.html">Téléphonie</a></li>
+                    <li><a href="ftp.html">FTP</a></li>
+                    <li><a href="mail.html">Mail</a></li>
+                    <li><a href="sauve.html">Sauvegarde</a></li>
+                    <li><a href="active_directory.html">Active Directory</a></li>
+                    <li><a href="ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#reinitialisation">Installation</a></li><br>
+                <li><a class="sommaire_element" href="#vlan">Création des utilisateurs</a></li><br>
+                <li><a class="sommaire_element" href="#ports">Création du partage / Profils itinérants</a></li><br>
+            </ul>
+        </p>
+    </div>
+
+    <div class="content">
+        <section id="presentation">
+            <h1>Mise en place de l'Active Directory</h1>
+
+            <h2 id="reinitialisation">Installation</h2>
+            <p>
+                Pour installer l'active directory nous allons dans <b></b>Gérer > ajouter des rôles et fonctionnalités > ad ds</b><br>
+                Puis on rentre les paramètres suivants :
+                <div class="commandes">
+                    login : Administrateur<br>
+                    mdp : Admin1*<br>
+                    un nom de domaine sur le drapeau :
+                    <ul>
+                    <li>domaine : GroupeE.local</li>
+                    <li>mdp restauration / Admin : Admin1*</li>
+                    <li>netbios : GROUPEE</li>
+                    </ul>
+                </div>
+            </p>
+
+            <h2 id="vlan">Création des utilisateurs</h2>
+            <p>
+                On Tape dans le menu Windows “utilisateur et ordinateur Active Directory”<br>
+                Puis nous allons dans Users, faire clic droit, créer utilisateur et nous rentrons les paramètres suivants :<br>
+                <div class="commandes">
+                    Pierre :
+                    <ul>
+                    <li>Login : Pierre</li>
+                    <li>mdp : Azerty*2</li>
+                    <li>Tel : 0102</li>
+                    <li>Mdp messagerie : 0291</li>
+                    <li>Pierre@groupeE.local</li>
+                    <li>mdp mail : Pierre01020291</li>
+                    </ul>
+                    <img id="dns" src="../../images/ad1.PNG ">
+                </div>
+            </p>
+
+            <h2 id="ports">Création du partage / Profils itinérants</h2>
+            <p>
+                Maintenant sur le PC du serveur, on créer un dossier Partagé et user.<br>
+                Ce dossier va Permetttre d’enregistrer les données des users.<br>
+                Pour cela on exécute les commandes suivantes :<br>
+                <div class="commandes">
+                    On fait d'abord clic droit sur les dossiers > propriété > partage avancé > autorisation > 
+                    "tout le monde" et on donne tous les droits.<br><br>
+                    <img id="dns" src="../../images/ad2.PNG "><br><br>
+                    Puis on configure des profils :<br>
+                    clic droit > propriété > Profil > chemin du profil :<br><br>
+                    <img id="dns" src="../../images/ad3.PNG "><br><br>             
+                </div>
+                <br><br>
+                Puis on met en place une stratégie de groupe(GPO) ce qui permet de récupérer 
+                les donnée enregistrée lors d’une prochaine connexion.<br>
+                Pour cela on exécute les commandes suivantes :<br><br>
+                <div class="commandes">
+                    on va dans Gestionnaire de serveur > Outils > Gestion des stratégies de groupe > domaine > clic droit > créer GPO 
+                    Puis on clic droit sur le GPO > modifier > Config utilisateur > stratégie > 
+                    modèle administration > système > Profil utilisateur où on active 2 paramètres: 
+                    <ul>
+                    <li>Connecter le répertoire de base à la racine qui permet d'enregistrer directement les fichiers dans “document”</li>
+                    <li>Spécifier les répertoires réseau à synchronisation. Qui est le chemin où sont stockées les données user : \\ADMIN-WS.GroupeE.local\user\%username%.V6</li>
+                    </ul>
+                </div>
+            </p>      
+        </section>
+    </div>
+</body>
+</html>

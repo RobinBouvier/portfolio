@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>SSH</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="dhcp.html">DHCP</a></li>
+                    <li><a href="dns.html">DNS</a></li>
+                    <li><a href="web.html">Web / Base de donnée</a></li>
+                    <li><a href="phone.html">Téléphonie</a></li>
+                    <li><a href="ftp.html">FTP</a></li>
+                    <li><a href="mail.html">Mail</a></li>
+                    <li><a href="sauve.html">Sauvegarde</a></li>
+                    <li><a href="active_directory.html">Active Directory</a></li>
+                    <li><a href="ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#switch">Configuration sur un switch/routeur</a></li><br>
+                <li><a class="sommaire_element" href="#linux">Configuration sur le serveur Linux</a></li><br>
+            </ul>
+        </p>
+    </div>
+    <div class="content">
+        <section id="presentation">
+            <h1>Installation d'une connexion SSH</h1>
+
+            <h2 id="switch">Configuration sur un switch/routeur</h2>
+            <p>
+                Tout d'abord il faut créer un utilisateur sur le switch ou le routeur pour permettre l'accès via SSH.<br>
+
+                <div class="commandes">
+                    Switch(config)#username userSSH privilege 15 secret userSSH
+                </div><br><br>
+                On crée ensuite une clé SSH pour pouvoir chiffrer la connexion :<br>
+
+                <div class="commandes">
+                    Switch(config)# hostname sw1
+                    sw1(config)# ip domain name groupeE.local
+                    sw1(config)# crypto key generate rsa
+                </div><br><br>
+
+                On peut alors activer le SSH sur l'appareil :<br>
+                <div class="commandes">
+                    Switch(config)#line vty 0 15
+                    Switch(config)#login local
+                    Switch(config)#transport input ssh
+                    Switch(config)#exit
+                </div><br><br>
+
+                Pour pouvoir passer en enable par SSH, il faut créer un mot de passe pour ce mode sur le switch et sur le routeur : <b>enable secret root</b>.<br>
+                Le SSH est maintenant configuré sur le Switch et sur le switch ou le routeur.
+
+            </p>
+
+            <h2 id="linux">Configuration sur le serveur Linux</h2>
+            <p>
+                Il faut d’abord s’assurer que nous sommes en super utilisateur avec toutes les variables d’environnement chargé, pour cela on exécute la commande <b>su -</b><br>
+                Sur le serveur, ajouter un utilisateur qui servira d’utilisateur pour se connecter au serveur:
+                <b>adduser userssh</b>, on lui donne ensuite un mot de passe, ici userssh.<br><br>
+                On installe ensuite <b>openssh-server </b>pour permettre l’accès à la machine depuis une machine distante.<br>
+                Maintenant depuis la machine distante on utilise le terminal windows ou linux pour se connecter en exécutant la commande <b>ssh userssh@192.168.3.1</b>, 
+                on entre ensuite le mot de passe et on a accès au serveur Linux.
+
+            </p>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>Logs</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../services/dhcp.html">DHCP</a></li>
+                    <li><a href="../services/dns.html">DNS</a></li>
+                    <li><a href="../services/web.html">Web / Base de donnée</a></li>
+                    <li><a href="../services/phone.html">Téléphonie</a></li>
+                    <li><a href="../services/ftp.html">FTP</a></li>
+                    <li><a href="../services/mail.html">Mail</a></li>
+                    <li><a href="../services/sauve.html">Sauvegarde</a></li>
+                    <li><a href="../services/log_presentation.html">Log</a></li>
+                    <li><a href="../services/active_directory.html">Active Directory</a></li>
+                    <li><a href="../services/ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#redirect">Redirection des logs DHCP vers un fichier</a></li><br>
+                <li><a class="sommaire_element" href="#analyse">Analyse des logs et extraction des @MAC</a></li><br>
+            </ul>
+        </p>
+    </div>
+
+    <div class="content">
+        <section id="presentation">
+            <h1>Mise en place de la redirection</h1>
+            
+            <h2 id="redirect">Redirection des logs DHCP vers un fichier.</h2>
+            <p>
+                Installation de Rsyslog avec la commande apt. <br>
+                On doit modifier le fichier de configuration du DHCP afin qu'il produise des logs pour cela on ajoute une ligne dans /etc/dhcp/dhcpd.conf <br>
+
+                <div class="commandes">
+                    log-facility local7;<br>
+
+                </div><br><br>
+                Par la suite on se rend dans le fichier de configuration /etc/rsyslog.d/dhcpd.conf pour indiquer à Rsyslog où enregistrer les logs et on ajoute la ligne : <br>
+                <div class="commandes">
+                    local7.* /var/log/dhcpd.log<br>
+
+                </div><br><br>
+            </p>
+
+            <h2 id="analyse">Analyse des logs et extraction des @MAC</h2>
+            <p>
+                Création d’un fichier avec les adresses mac connectées au dhcp de notre réseau.<br>
+
+                <div class="commandes">
+                    nano allowed_macs.txt<br>
+                </div><br><br>
+                On remplis le fichier avec les adresses mac de notre réseau dont le DHCP à besoin (1 par ligne).
+                <br><br>
+                On crée un script python afin d’analyser les logs du dhcp et de comparer les adresses mac contenues dans les logs à celles autorisées dans le fichier ci-dessus.
+                <img src="../../images/verif_mac.PNG"><br><br>
+            </p>
+
+        </section>
+    </div>
+</body>
+</html>

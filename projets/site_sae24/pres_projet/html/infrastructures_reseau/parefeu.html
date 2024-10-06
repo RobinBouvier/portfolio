@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/> 
+    <title>Firewall</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../presentation.html">Presentation</a></li>
+            <li class="dropdown">
+                <a href="#">Network Infrastructure</a>
+                <ul class="dropdown-menu">
+                    <li><a href="switch.html">Switch</a></li>
+                    <li><a href="routeur.html">Router</a></li>
+                    <li><a href="parefeu.html">Firewall</a></li>
+                    <li><a href="ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../services/dhcp.html">DHCP</a></li>
+                    <li><a href="../services/dns.html">DNS</a></li>
+                    <li><a href="../services/web.html">Web / Database</a></li>
+                    <li><a href="../services/phone.html">Telephony</a></li>
+                    <li><a href="../services/ftp.html">FTP</a></li>
+                    <li><a href="../services/mail.html">Mail</a></li>
+                    <li><a href="../services/sauve.html">Backup</a></li>
+                    <li><a href="../services/log_presentation.html">Log</a></li>
+                    <li><a href="../services/active_directory.html">Active Directory</a></li>
+                    <li><a href="../services/ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Organization</a></li>
+            <li class="dropdown">
+                <a href="#">Security</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sommaire_container">
+        <p class="sommaire_title">Table of Contents</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#installation">Basic Installation</a></li><br>
+                <li><a class="sommaire_element" href="#general">General Configuration</a></li><br>
+                <li><a class="sommaire_element" href="#interface">Interface Configuration</a></li><br>
+                <li><a class="sommaire_element" href="#routage">Routing Configuration</a></li><br>
+                <li><a class="sommaire_element" href="#NAT">NAT Configuration</a></li><br>
+                <li><a class="sommaire_element" href="#filtrage">Filtering Configuration</a></li><br>
+            </ul>
+        </p>
+    </div>
+
+    <div class="content">
+        <section id="presentation">
+            <h1>Firewall Installation</h1>
+
+            <h2 id="installation">Basic Installation</h2>
+            <p>
+                Firewall reset: button behind the firewall.<br>
+                The default network is 10.0.0.0/8, and the default interface is 10.0.0.254.<br>
+                Connect a PC to the LAN interface of the firewall by setting an IP address on the same network as the firewall.<br>
+                Then connect to the firewall's web interface by typing the IP address of the LAN interface of the firewall.<br>
+                Log in with the default credentials: admin / admin.<br>
+            </p>
+
+            <h2 id="general">General Configuration</h2>
+            <p>
+                <u>Changing the default password:</u><br>
+                Go to Configuration -> System -> Administrator -> Admin account<br><br>
+                <img src="../../images/admin.png"><br><br>
+                <u>Creating objects:</u><br>
+                Objects serve as DNS. Add an object for the different networks and for each machine in the network.<br>
+                Go to Configuration -> Object -> Network Object<br>
+                <img src="../../images/objet.png"><br><br>
+                <u>Assigning DNS:</u><br>
+                Go to Configuration -> System -> Network Settings<br><br>
+                <img src="../../images/dns.PNG"><br>
+                Add the IUT's DNS: 192.168.117.181 and 192.168.117.182b<br>
+            </p>
+
+            <h2 id="interface">Interface Configuration</h2>
+            <p>
+                Go to Configuration -> Network -> Interfaces<br>
+                <img src="../../images/interface.png"><br><br>
+                There are 3 interfaces: "in" corresponds to the LAN, "out" corresponds to the WAN interface, and "dmz" corresponds to the DMZ interface.<br>
+                Configure the "in" interface by setting the IP address: 192.168.5.1/24<br>
+                Configure the "out" interface by setting the IP address: 172.25.0.120/16<br>
+                Add in advanced settings, the default gateway: 172.25.255.254<br>
+            </p>
+
+            <h2 id="routage">Routing Configuration</h2>
+            <p>
+                Go to Configuration -> Network -> Routing<br>
+                Add a static route for the local network: 192.168.3.0/24<br>
+            </p>
+
+            <h2 id="NAT">NAT Configuration</h2>
+            <p>
+               This allows private IP addresses to be transformed into public IP addresses.<br>
+                Go to Configuration -> Security Policy -> Filtering - NAT<br>
+                <img src="../../images/NAT.PNG"><br><br>
+                Rule 1 allows port translation to reach the web server.<br>
+                Rule 2 allows address translation to access the internet.<br>
+            </p>
+
+            <h2 id="filtrage">Filtering Configuration</h2>
+            <p>
+                This allows controlling and restricting incoming and outgoing connections based on IP addresses and ports. It adds an additional layer of security and control beyond mere IP address masking.<br>
+                Go to Configuration -> Security Policy -> Filtering - NAT<br>
+                <img src="../../images/filtrage.PNG"><br><br>
+                Rule 1 blocks all connections to the SSH port.<br>
+                Rule 2 allows all requests to pass.<br>
+            </p>
+        </section>
+    </div>
+
+</body>
+</html>

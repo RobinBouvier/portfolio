@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>FTP</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="dhcp.html">DHCP</a></li>
+                    <li><a href="dns.html">DNS</a></li>
+                    <li><a href="web.html">Web / Base de donnée</a></li>
+                    <li><a href="phone.html">Téléphonie</a></li>
+                    <li><a href="ftp.html">FTP</a></li>
+                    <li><a href="mail.html">Mail</a></li>
+                    <li><a href="sauve.html">Sauvegarde</a></li>
+                    <li><a href="active_directory.html">Active Directory</a></li>
+                    <li><a href="ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+        <div class="sommaire_container">
+            <p class="sommaire_title">Sommaire</p>
+            <p class="sommaire_list">
+                <ul>
+                    <li><a class="sommaire_element" href="#presentation">Installation</a></li><br>
+                    <li><a class="sommaire_element" href="#configuration">Configuration</a></li><br>
+                </ul>
+            </p>
+        </div>
+
+        <div class="content">
+            <section id="presentation">
+                <h1>Installation d'un serveur TCP</h1>
+
+                <h2 id="installation">Installation du serveur</h2>
+                <p>
+                    Tout d'abord il faut installer un serveur FTP sur le serveur Linux. Ici nous avons choisi le serveur VSFTP. Pour cela, on exécute les commandes suivantes :
+
+                    <div class="commandes">
+                        sudo apt update<br>
+                        sudo apt install vsftpd
+                    </div><br><br>
+                </p>
+
+                <h2 id="configuration">Configuration</h2>
+                <p>
+                    Ensuite, il faut configurer le serveur FTP. Pour cela, on édite le fichier de configuration du serveur VSFTP. On exécute la commande suivante :
+
+                    <div class="commandes">
+                        sudo nano /etc/vsftpd.conf
+                    </div><br><br>
+
+                    On modifie les lignes suivantes :<br>
+
+                    <div class="commandes">
+                        local_enable=YES<br>
+                        write_enable=YES<br>
+                    </div><br><br>
+
+                    On ajoute ensuite les lignes suivantes pour donner une plage de port à respecter pour l'échange de fichier :<br>
+                    <div class="commandes">
+                        pasv_enable=Yes<br>
+                        pasv_max_port=40000<br>
+                        pasv_min_port=50000<br>
+                    </div><br><br>
+
+
+                    On redémarre le serveur FTP :<br>
+
+                    <div class="commandes">
+                        sudo systemctl restart vsftpd
+                    </div><br><br>
+
+                    On fait ensuite attention à ce que les ports 20, 21 et que la plage que l'on a choisi plus haut soient ouverts sur le pare-feu du serveur Linux. 
+                    Pour cela, on exécute les commandes suivantes :
+
+                    <div class="commandes">
+                        ufw allow 20<br>
+                        ufw allow 21<br>
+                        ufw allow 40000:50000/tcp<br>
+                        ufw enable
+                    </div><br><br>
+
+                    Le serveur est désormais opérationnel.
+                </p>
+            </section>
+        </div>
+    
+</body>
+</html>

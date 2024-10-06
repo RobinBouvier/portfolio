@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>Zabbix</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../services/dhcp.html">DHCP</a></li>
+                    <li><a href="../services/dns.html">DNS</a></li>
+                    <li><a href="../services/web.html">Web / Base de donnée</a></li>
+                    <li><a href="../services/phone.html">Téléphonie</a></li>
+                    <li><a href="../services/ftp.html">FTP</a></li>
+                    <li><a href="../services/mail.html">Mail</a></li>
+                    <li><a href="../services/sauve.html">Sauvegarde</a></li>
+                    <li><a href="../services/log_presentation.html">Log</a></li>
+                    <li><a href="../services/active_directory.html">Active Directory</a></li>
+                    <li><a href="../services/ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#paquets">Installation des paquets </a></li><br>
+                <li><a class="sommaire_element" href="#bdd">Créer la base de données</a></li><br>
+                <li><a class="sommaire_element" href="#serveur">Démarrer le serveur et l’agent Zabbix</a></li><br>
+                <li><a class="sommaire_element" href="#conf">Configuration</a></li><br>
+                <li><a class="sommaire_element" href="#agent">Création d'un agent Windows sur le client</a></li><br>
+                <li><a class="sommaire_element" href="#conf-agent-server">Création de l'agent Windows sur le server</a></li><br>
+
+            </ul>
+        </p>
+    </div>
+
+    <div class="content">
+        <section id="presentation">
+            <h1>Installation d'un serveur Zabbix et d'un client Windows Zabbix</h1>
+
+            <h2 id="paquets">Installation des paquets </h2>
+            <p>
+                On doit installer les différents paquets permettant d'installer le serveur :<br>
+
+                <div class="commandes">
+                    wget https://repo.zabbix.com/zabbix/5.4/debian/pool/main/z/zabbix-release/zabbix-release_5.4-1+debian11_all.deb
+                    <br>
+                    sudo dpkg -i zabbix-release_5.4-1+debian11_all.deb
+                    <br>
+                    sudo apt update
+                </div><br><br>
+                Puis, on installe les différents paquets nécessaires pour créer le serveur Zabbix :<br><br>
+
+                <div class="commandes">
+                    sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2 mariadb-server
+                </div><br><br>
+            </p>
+
+            <h2 id="bdd">Créer la base de données </h2>
+            <p>
+                Nous allons maintenant, avec MariaDB, créer la base de données pour Zabbix : <br>
+
+                <div class="commandes">
+                    sudo mysql -u root -p<br>
+                    mysql> create database zabbix character set utf8 collate utf8_bin;<br>
+                    mysql> create user zabbix@localhost identified by 'root';<br>
+                    mysql> grant all privileges on zabbix.* to zabbix@localhost;<br>
+                    mysql> quit;<br>
+                </div><br><br>
+
+                Puis dans le fichier, /etc/zabbix/zabbix_server.conf, nous devons ajouter cette ligne : <br><br>
+
+                <div class="commandes">
+                    DBPassword=root
+                </div><br><br>
+            </p>
+
+            <h2 id="serveur">Démarrer le serveur et l’agent Zabbix </h2>
+            <p>
+                Maintenant, nous pouvons démarrer le serveur :<br>
+
+                <div class="commandes">
+                    sudo systemctl restart zabbix-server zabbix-agent2 apache2<br>
+                    sudo systemctl enable zabbix-server zabbix-agent2 apache2<br>
+                </div><br><br>
+            </p>
+
+            <h2 id="conf">Configuration </h2>
+            <p>
+                Pour réaliser la configuration de Zabbix, nous nous connectons à l'ip du serveur : 192.168.3.1 et nous arrivons sur cette page :<br>
+
+                <img src="../../images/ecran_config.png" width="40%"><br><br>
+
+
+                Il suffit suivre les instructions et d'appuyer sur <b>Next Step</b>, puis Finish pour finir l'installation.<br>
+                Au final, nous pouvons nous connecter au serveur Zabbix et arrivons sur cette interface :
+                <div class="commandes">
+                    disable_plaintext_auth = no<br>
+                </div><br><br>
+                On change ensuite les droits du dossier mail pour que les utilisateurs puissent y accéder avec <b>chmod 777 /var/mail</b><br>
+                On redémarre ensuite le service dovecot avec <b>systemctl restart dovecot</b>
+            </p>
+
+            <h2 id="agent">Création d'un agent Windows sur le client </h2>
+            <p>
+                Pour que le serveur Zabbix puisse monitérer les clients du réseau. Nous devons installer un <b>agent Zabbix</b> sur les clients et rajouter un <b>hôte</b> sur le serveur.
+                Pour installer un agent Zabbix sur Windows :
+                <ol>
+                    <li>Installer le <b>.msi</b> sur le site de Zabbix : </li><br>
+                    <img src="../../images/install-agent.png" width="40%"><br><br>
+                    <li>Sur l'invite d'installation, nous rentrons les différentes informations qu'il nous demande :</li><br>
+                    <img src="../../images/ip_domaine_proxy.png" width="40%"><br><br>
+                    <li>Puis nous suivons les étapes au fur et à mesure.</li>
+                </ol>
+
+                L'agent Zabbix est installé et configurer pour communiquer avec le serveur.    
+            </p>
+
+            <h2 id="conf-agent-server">Création de l'agent Windows sur le server </h2>
+            <p>
+                Maintenant, nous devons configurer l'agent Zabbix sur le serveur. Sur cet onglet : <br><br>
+                <img src="../../images/config.png" width="50%"><br>
+
+                Nous cliquons sur <b>Créer un hôte</b> et nous arrivons sur cette page : <br><br>
+                <img src="../../images/agent-server-1.png" width="50%"><br>
+                Dans <b>Nom de l'hôte</b>, nous mettons le nom du client. Dans <b>Groupes</b>, nous cliquons sur <b>Sélectionner</b> et prenons <b>Discovered hosts.</b><br>
+                Ensuite, dans Interfaces, nous sélectionnons <b>Agent</b> et nous mettons l'adresse IP du client (l'agent).<br><br>
+
+                Enfin, dans l'onglet Modèles, nous choisissons la Template : <b>Templates/Operating systems</b> : <br><br>
+                <img src="../../images/agent-server-2.png" width="50%"><br>
+                
+                Nous pouvons donc appuyer sur <b>Ajouter</b> et l'agent est créé.<br><br>
+                Nous avons réaliser cette manipulation pour tous les PCs clients ainsi que le PC avec Windows Server, et le routeur et le switch. Au final, nous obtenons : <br><br>
+                <img src="../../images/config.png" width="50%">
+            </p>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>Mail</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="dhcp.html">DHCP</a></li>
+                    <li><a href="dns.html">DNS</a></li>
+                    <li><a href="web.html">Web / Base de donnée</a></li>
+                    <li><a href="phone.html">Téléphonie</a></li>
+                    <li><a href="ftp.html">FTP</a></li>
+                    <li><a href="mail.html">Mail</a></li>
+                    <li><a href="sauve.html">Sauvegarde</a></li>
+                    <li><a href="active_directory.html">Active Directory</a></li>
+                    <li><a href="ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#users">Création des différents utilisateurs </a></li><br>
+                <li><a class="sommaire_element" href="#MX">Domaine MX</a></li><br>
+                <li><a class="sommaire_element" href="#postfix">Installation de PostFix</a></li><br>
+                <li><a class="sommaire_element" href="#dovecot">Installation de Dovecot</a></li><br>
+                <li><a class="sommaire_element" href="#thunderbird">Connexion sur Thunderbird</a></li><br>
+            </ul>
+        </p>
+    </div>
+
+    <div class="content">
+        <section id="presentation">
+            <h1>Installation d'un serveur TCP</h1>
+
+            <h2 id="users">Création des différents utilisateurs</h2>
+            <p>
+                On doit créer les différents utilisateurs qui ont besoin d'une boite mail. Pour cela, on exécute les commandes suivantes sur le serveur Linux:<br>
+
+                <div class="commandes">
+                    adduser Pierre<br>
+                </div><br><br>
+                Puis on lui attribue le mot de passe que l'on a choisi dans l'Active Directory.<br>
+            </p>
+
+            <h2 id="MX">Domaine MX</h2>
+            <p>
+                Pour que les mails puissent être envoyés et reçus, il faut configurer le domaine MX. Pour cela, on exécute les commandes suivantes sur le serveur Linux:<br>
+
+                <div class="commandes">
+                    nslookup<br>
+                    set q=mx<br>
+                </div><br><br>
+            </p>
+
+            <h2 id="postfix">Installation de PostFix</h2>
+            <p>
+                On installe postfix pour permettre l'envoi de mail avec le protocole SMTP :<br>
+
+                <div class="commandes">
+                    apt install postfix<br>
+                </div><br><br>
+                Pendant l'installation, on nous demande de donner un nom de domaine, ici ce nom est "groupeE.local".
+            </p>
+
+            <h2 id="dovecot">Installation de dovecot</h2>
+            <p>
+                Pour pouvoir récupérer les mails, on installe dovecot :<br>
+
+                <div class="commandes">
+                    apt install dovecot-imapd<br>
+                    apt install dovecot-pop3d<br>
+                </div><br><br>
+
+                On change la ligne suivante dans le dossier <b>/etc/dovecot/conf.d/10-auth.conf</b>:
+                <div class="commandes">
+                    disable_plaintext_auth = no<br>
+                </div><br><br>
+                On change ensuite les droits du dossier mail pour que les utilisateurs puissent y accéder avec <b>chmod 777 /var/mail</b><br>
+                On redémarre ensuite le service dovecot avec <b>systemctl restart dovecot</b>
+            </p>
+
+            <h2 id="thunderbird">Connexion sur Thunderbird</h2>
+            <p>
+                Pour permettre aux utilisateurs de se connecter à leur boite mail, on utilise le logiciel Thunderbird.
+                On ajoute tout d'abord un nouveau compte en allant dans <b>Paramètres des comptes -> Gestion des comptes -> Ajouter un compte de messagerie.</b>
+                <img src="../../images/thunderbird.png"><br><br>
+
+                On renseigne ensuite l'adresse mail, le nom d'utilisateur et le mot de passe.
+                On clique ensuite sur <b>Configuration manuel</b> où on va spécifier le protocole POP3 avec le port 110
+                et le nom d'hôte du serveur mail.<br>
+                <img src="../../images/thunderbird1.png"><br><br>
+            </p>
+        </section>
+    </div>
+</body>
+</html>

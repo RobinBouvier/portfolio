@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+
+    <title>Ap Wifi</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../services/dhcp.html">DHCP</a></li>
+                    <li><a href="../services/dns.html">DNS</a></li>
+                    <li><a href="../services/web.html">Web / Base de donnée</a></li>
+                    <li><a href="../services/phone.html">Téléphonie</a></li>
+                    <li><a href="../services/ftp.html">FTP</a></li>
+                    <li><a href="../services/mail.html">Mail</a></li>
+                    <li><a href="../services/sauve.html">Sauvegarde</a></li>
+                    <li><a href="../services/log_presentation.html">Log</a></li>
+                    <li><a href="../services/active_directory.html">Active Directory</a></li>
+                    <li><a href="../services/ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurisation</a>
+                <ul class="dropdown-menu">
+                    <li><a href="zabbix.html">Zabbix</a></li>
+                    <li><a href="log_presentation.html">Logs</a></li>
+                    <li><a href="proxy.html">Proxy</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#presentation">Configuration</a></li><br>
+            </ul>
+        </p>
+    </div>
+    <div class="content">
+        <section id="presentation">
+            <h1>Mise en place du proxy</h1>
+
+            <h2 id="installation">Configuration</h2>
+            <p>
+                Pour mettre place les sauvagardes il faut tout d'abord un espace de stockage dédié que nous avaons créer en partitionnant 
+                le disque en 2 partie. Puis sur l'active directory nous installons le service de sauvegarde.<br>
+                Pour cela, on exécute les commandes suivantes :
+
+                <div class="commandes">
+                    Nous allons dans le fichier de configuration suivant <b>nano /etc/squid/squid.conf</b><br>
+                    Puis nous configurons le fichier :<br><br>
+                    <img id="dns" src="../../images/proxy1.PNG"><br><br>
+                    <img id="dns" src="../../images/prowy2.PNG "><br><br>  
+                    Voici le fichier des sites blacklist :<br><br>
+                    <img id="dns" src="../../images/prowy3.png "><br><br>  
+                </div>
+            </p>
+        </section>
+    </div>
+</body>
+</html>

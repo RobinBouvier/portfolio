@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <link rel="stylesheet" href="../../css/image.css"/>
+    <title>Téléphonie</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="dhcp.html">DHCP</a></li>
+                    <li><a href="dns.html">DNS</a></li>
+                    <li><a href="web.html">Web / Base de donnée</a></li>
+                    <li><a href="phone.html">Téléphonie</a></li>
+                    <li><a href="ftp.html">FTP</a></li>
+                    <li><a href="mail.html">Mail</a></li>
+                    <li><a href="sauve.html">Sauvegarde</a></li>
+                    <li><a href="active_directory.html">Active Directory</a></li>
+                    <li><a href="ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#presentation">Installation du serveur de téléphonie</a></li><br>
+                <li><a class="sommaire_element" href="#configuration">Configuration de FREEPBX</a></li><br>
+                <ul>
+                    <li><a class="sommaire_element" href="#2.1">1. Les utilisateurs</a></li>
+                    <li><a class="sommaire_element" href="#2.2">2. La messagerie vocale</a></li>
+                </ul>
+            </ul>
+        </p>
+    </div>
+    <div class="content">
+        <section id="presentation">
+            <h1>Mise en place du serveur de téléphonie</h1>
+
+            <h2 id="installation">Installation du serveur de téléphonie</h2>
+            <p>
+                Nous avons choisi de virtualiser notre serveur de téléphonie.
+                Pour cela nous installons VirtualBox afin de créer une machine virtuelle
+                visant à héberger le serveur de téléphonie (IPBX virtuel)
+                    Pour commencer, il faut créer une nouvelle Machine virtuelle sans iso avec pour OS linux suivre les étapes et allouer 1.2Go de ram.<br> 
+                    Par la suite, avant de démarrer la VM, il faut mettre en disque de démarrage l’ISO téléchargé sur le site de asterisk. <br> 
+                    Puis on changer l’ordre de BOOT par le disque de démarrage, puis on lancer la VM.<br> 
+                    Suivre les étapes et une fois installé, supprimer le disque de démarrage et relancer.<br> 
+                    Pour finir se connecter à l’ipbx virtuel, dont on a ajouté l’adresse MAC avec une IP dans le DHCP.<br><br>
+                L’ipbx est maintenant prêt à être configuré
+            </p>
+
+            <h2 id="configuration">Configuration de FREEPBX</h2>
+            <p>
+                Maintenant que notre machine virtuelle est installer, nous allons créer des utilisateurs avec chacun un numéro
+                ainsi qu'une messagerievocale
+                <h3 id="2.1">1. Les utilisateurs</h3>
+                On se connecter à la VM via son interface graphique en tapant l’IP de la VM dans le navigateur.<br>
+                Pour commencer nous allons ajouter nos réseaux dans FREEPBX ainsi que des utilisateurs<br>
+                <div class="commandes">
+                    On commence par configurer le pare-feu, pour autorisé nos réseaux. 
+                    On se rend dans connectivité -> firewall -> networks<br>
+                    Puis on ajoute les réseaux désirés.<br><br>
+                    <img id="tel" src="../../images/tel1.png"><br><br>
+                </div><br><br>
+                Maintenant, nous ajoutons les utilisateurs<br><br>
+                <div class="commandes">
+                    On se rend dans applications -> postes -> Ajout d’un nouveau poste SIP.<br><br>
+                    <img id="tel" src="../../images/tel2.png"><br><br>
+                </div><br><br>
+                Nous venons de configurer les utilisateurs de notre service de téléphonie,
+                nous pouvons maintenant passer des appel à l'aide de softphone sur nos machines clientes.
+
+                <h3 id="2.2">2. La messagerie vocale</h3>
+                On exécute ensuite la commande suivante pour activer le NAT sur le routeur :<br>
+                <div class="commandes">
+                    <p>
+                    Router#conf t<br>
+                    Router(config)#ip nat inside source list 100 interface gi0/0/1 overload
+                    </p>
+                </div><br>
+                Elle permet de dire que les adresses IP de notre réseau interne (défini par l'ACL 100) vont être traduites en 
+                l'adresse IP de l'interface gi0/0/1.<br><br>
+                
+            </p>
+        </section>
+    </div>
+</body>
+</html>

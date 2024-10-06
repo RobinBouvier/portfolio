@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <link rel="stylesheet" href="../../css/image.css"/>
+    <title>DHCP</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="dhcp.html">DHCP</a></li>
+                    <li><a href="dns.html">DNS</a></li>
+                    <li><a href="web.html">Web / Base de donnée</a></li>
+                    <li><a href="phone.html">Téléphonie</a></li>
+                    <li><a href="ftp.html">FTP</a></li>
+                    <li><a href="mail.html">Mail</a></li>
+                    <li><a href="sauve.html">Sauvegarde</a></li>
+                    <li><a href="log_presentation.html">Log</a></li>
+                    <li><a href="active_directory.html">Active Directory</a></li>
+                    <li><a href="ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#presentation">Mise en place du serveur sur le réseau</a></li><br>
+                <li><a class="sommaire_element" href="#configuration">Configuration</a></li><br>
+            </ul>
+        </p>
+    </div>
+    <div class="content">
+        <section id="presentation">
+            <h1>Installation d'un service DHCP</h1>
+
+            <h2 id="installation">Mise en place du serveur sur le réseau</h2>
+            <p>
+                Afin de configurer l’interface souhaitée en direction du switch nous allons dans <b>nano /etc/network/interfaces</b>
+
+                <div class="commandes">
+                    On met cette configuration afin d’avoir accès au réseau du vlan.<br><br>
+                    <img id="dns" height="230px" width="300px" src="../../images/dhcp1.png">
+                </div><br><br>
+                Pour que la configuration soit prise en compte on redémarrer le service avec <b>systemctl restart networking</b>
+            </p>
+
+            <h2 id="configuration">Configuration</h2>
+            <p>
+                Pour commencer nous allons dans <b>nano /etc/default/isc-dhcp-server</b> pour configurer l'interface
+                d'écoute du serveur
+                <div class="commandes">
+                    Nous mettons l'interface ens19 en écoute :<br>
+                    INTERFACESv4= « ens19 »
+                </div><br><br>
+                Puis dans le fichier de configuration du serveur <b>nano /etc/dhcp/dhcpd.conf</b> 
+                nous ajoutons les différentes plages d’adresses pour les différents vlan ainsi que leur passerelles respective.<br><br> 
+
+                <div class="commandes">
+                    Les plages d'adresse pour les vlan 100,200 et 300<br><br>
+                    <img id="dns" src="../../images/dhcp2.png"><br><br>
+                    Pour le point d'accès wifi qui est seul dans le vlan 400 nous lui attribuons une ip fixe par rapport à son adresse MAC<br><br>
+                    <img id="dns" src="../../images/dhcp3.png"><br><br>
+                    Dans le même fichier on remplace les lignes de DNS par le bon DNS : <br>
+                    option domain-name-servers 192.168.3.2;
+                </div><br><br>
+                Pour finir, on redémarre le serveur DHCP avec systemctl restart isc-dhcp-server<br>
+                Maintenant, le serveur DHCP est mis en place et les machines vont pouvoir recevoir leur configuration de façon automatiques
+            </p>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>Routeur</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="switch.html">Switch</a></li>
+                    <li><a href="routeur.html">Routeur</a></li>
+                    <li><a href="parefeu.html">Pare-feu</a></li>
+                    <li><a href="ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../services/dhcp.html">DHCP</a></li>
+                    <li><a href="../services/dns.html">DNS</a></li>
+                    <li><a href="../services/web.html">Web / Base de donnée</a></li>
+                    <li><a href="../services/phone.html">Téléphonie</a></li>
+                    <li><a href="../services/ftp.html">FTP</a></li>
+                    <li><a href="../services/mail.html">Mail</a></li>
+                    <li><a href="../services/sauve.html">Sauvegarde</a></li>
+                    <li><a href="../services/log_presentation.html">Log</a></li>
+                    <li><a href="../services/active_directory.html">Active Directory</a></li>
+                    <li><a href="../services/ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#routage_vlan">Routage inter-VLANs</a></li><br>
+                <li><a class="sommaire_element" href="#config_ip">Configuration IP</a></li><br>
+                <li><a class="sommaire_element" href="#nat">Activation du NAT</a></li>
+                 <ul>
+                    <li><a class="sommaire_element" href="#nat_acl">1. Configuration d'ACL</a></li>
+                    <li><a class="sommaire_element" href="#nat_nat">2. Configuration du NAT</a></li>
+                 </ul>
+            </ul>
+        </p>
+    </div>
+    <div class="content">
+        <section id="presentation">
+            <h1>Installation d'un routeur Cisco</h1>
+
+            <h2 id="routage_vlan">Routage inter-VLANs</h2>
+            <p>
+                Nous avons créé des VLANs sur le <a class="a_intext" href="./switch.html">switch</a> et pour permettre le routage entre ces VLANs il faut 
+                créer des sous-interfaces sur le routeur et les configurer.<br>
+                Pour cela, on exécute les commandes suivantes :
+
+                <div class="commandes">
+                    Router#conf t<br>
+                    Router(config)#int gi0/0/0.XXX<br>
+                    Router(config-subif)#encapsulation dot1Q < numero du vlan ><br>
+                    Router(config-subif)#ip address < adresse > < masque > <br>
+                    Router(config-subif)#no shutdown 
+                </div><br><br>
+                On fait cette manipulation pour chaque VLAN créé sur le switch en ajoutant une sous interface par VLAN.
+            </p>
+
+            <h2 id="config_ip">Configuration IP</h2>
+            <p>
+                Nous devons ensuite configurer le routeur du côté du réseau de l'IUT pour permettre la connexion vers internet quand le 
+                <a class="a_intext" href="#nat">NAT</a> sera configurer.<br>
+                Pour configurer l'adresse IP du routeur, on exécute les commandes suivantes :
+
+                <div class="commandes">
+                    Router#conf t<br>
+                    Router(config)#int gi0/0/1<br>
+                    Router(config-if)#ip address < adresse > < masque ><br>
+                    Router(config-if)#no shutdown
+                </div><br><br>
+            </p>
+
+            <h2 id="nat">Activation du NAT</h2>
+            <p>
+                Pour permettre à notre réseau d'accéder à Internet, nous devons activer la translation d'adresse IP sur notre routeur.
+                Les adresses provenant de notre réseau vont donc être traduites en une seule adresse IP publique.<br>
+                On l'implémente avec les étapes suivantes :
+
+                <h3 id="nat_acl">1. Configuration d'ACL</h3>
+                On configure des règles d'accès pour définir quelles adresses IP peuvent accéder à internet.<br>
+                <div class="commandes">
+                    Router#conf t<br>
+                    Router(config)# access-list 100 permit ip < @reseau interne > < masque inversé > any
+                </div><br>
+                On fait cette étapes 4 fois en changeant l'adresse réseau pour correspondre aux adresses de nos VLANs.
+
+                <h3 id="nat_nat">2. Configuration du NAT</h3>
+                On exécute ensuite la commande suivante pour activer le NAT sur le routeur :<br>
+                <div class="commandes">
+                    <p>
+                    Router#conf t<br>
+                    Router(config)#ip nat inside source list 100 interface gi0/0/1 overload
+                    </p>
+                </div><br>
+                Elle permet de dire que les adresses IP de notre réseau interne (défini par l'ACL 100) vont être traduites en 
+                l'adresse IP de l'interface gi0/0/1.<br><br>
+
+                On dit ensuite quelles interfaces sont en inside et en outside avec les commandes suivantes :<br>
+                <div class="commandes">
+                    <p>
+                    Pour les adresses en interne :<br>
+                    Router#conf t<br>
+                    Router(config)#int gi0/0/0.XXX<br>
+                    Router(config-if)#ip nat inside<br>
+                    Router(config-if)#exit<br>
+                    <br>
+                    Pour l'adresse extérieur :<br>
+                    Router(config)#int gi0/0/1<br>
+                    Router(config-if)#ip nat outside
+                    </p>
+        </section>
+    </div>
+</body>
+</html>

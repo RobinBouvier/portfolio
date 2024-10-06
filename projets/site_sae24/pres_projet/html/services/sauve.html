@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <link rel="stylesheet" href="../../css/image.css"/>
+    <title>Sauvegarde</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../infrastructures_reseau/switch.html">Switch</a></li>
+                    <li><a href="../infrastructures_reseau/routeur.html">Routeur</a></li>
+                    <li><a href="../infrastructures_reseau/parefeu.html">Pare-feu</a></li>
+                    <li><a href="../infrastructures_reseau/ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="dhcp.html">DHCP</a></li>
+                    <li><a href="dns.html">DNS</a></li>
+                    <li><a href="web.html">Web / Base de donnée</a></li>
+                    <li><a href="phone.html">Téléphonie</a></li>
+                    <li><a href="ftp.html">FTP</a></li>
+                    <li><a href="mail.html">Mail</a></li>
+                    <li><a href="phone.html">Sauvegarde</a></li>
+                    <li><a href="active_directory.html">Active Directory</a></li>
+                    <li><a href="ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="../organasation.html">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                    <li><a href="../securisation/proxy.html">Proxy</a></li>
+                    <li><a href="../securisation/zabbix.html">Zabbix</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#presentation">Installation</a></li><br>
+                <li><a class="sommaire_element" href="#configuration">Configuration</a></li><br>
+            </ul>
+        </p>
+    </div>
+    <div class="content">
+        <section id="presentation">
+            <h1>Mise en place de sauvegarde</h1>
+
+            <h2 id="installation">Installation</h2>
+            <p>
+                Pour mettre place les sauvagardes il faut tout d'abord un espace de stockage dédié que nous avaons créer en partitionnant 
+                le disque en 2 partie. Puis sur l'active directory nous installons le service de sauvegarde.<br>
+                Pour cela, on exécute les commandes suivantes :
+
+                <div class="commandes">
+                    On clique sur Gérer > Ajouter des rôles et des fonctionnalités.<br>
+                    Puis on passe les premières pages de l'assistant jusqu'à arriver à Sélectionner les fonctionnalités.<br>
+                    On cochez sauvegarde windows server et on installe la fonctionnalité.                
+                </div>
+            </p>
+
+            <h2 id="configuration">Configuration</h2>
+            <p>
+                Nous devons ensuite configurer les sauvegardes pour permettre qu'elle soit effectué de façon journalière.<br>
+                Pour configurer ces sauvegardes, on exécute les commandes suivantes :
+
+                <div class="commandes">
+                    nous allons dans <b>Outils>sauvegarde windows server>sauvegarde locale>planification de sauvegarde</b><br>
+                    Puis on sélection sauvegarde complet ainsi que l'heure de la sauvegarde<br>
+                    <img id="dns" src="../../images/sauve1.PNG"><br><br>
+                    Puis sauvegarde vers un volume et installer
+                </div><br><br>
+                La sauvegarde est maintenant en place
+            </p>
+        </section>
+    </div>
+</body>
+</html>

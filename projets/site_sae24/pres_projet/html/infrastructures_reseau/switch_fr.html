@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/navbar_style.css"/>
+    <link rel="stylesheet" href="../../css/global.css"/>
+    <title>Switch</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../../../index.html">Accueil</a></li>
+            <li><a href="../presentation.html">Présentation</a></li>
+            <li class="dropdown">
+                <a href="#">Infrastructures Réseau</a>
+                <ul class="dropdown-menu">
+                    <li><a href="switch.html">Switch</a></li>
+                    <li><a href="routeur.html">Routeur</a></li>
+                    <li><a href="parefeu.html">Pare-feu</a></li>
+                    <li><a href="ap_wifi.html">AP WiFi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../services/dhcp.html">DHCP</a></li>
+                    <li><a href="../services/dns.html">DNS</a></li>
+                    <li><a href="../services/web.html">Web / Base de donnée</a></li>
+                    <li><a href="../services/phone.html">Téléphonie</a></li>
+                    <li><a href="../services/ftp.html">FTP</a></li>
+                    <li><a href="../services/mail.html">Mail</a></li>
+                    <li><a href="../services/sauve.html">Sauvegarde</a></li>
+                    <li><a href="../services/log_presentation.html">Log</a></li>
+                    <li><a href="../services/active_directory.html">Active Directory</a></li>
+                    <li><a href="../services/ssh.html">SSH</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Organisation</a></li>
+            <li class="dropdown">
+                <a href="#">Sécurité</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../securisation/log_presentation.html">Logs</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sommaire_container">
+        <p class="sommaire_title">Sommaire</p>
+        <p class="sommaire_list">
+            <ul>
+                <li><a class="sommaire_element" href="#reinitialisation">Réinitialisation du switch</a></li><br>
+                <li><a class="sommaire_element" href="#vlan">Configuration des VLANs</a></li><br>
+                <li><a class="sommaire_element" href="#ports">Attribution des ports</a></li><br>
+                <li><a class="sommaire_element" href="#trunk">Mode Trunk</a></li>
+            </ul>
+        </p>
+    </div>
+
+    <div class="content">
+        <section id="presentation">
+            <h1>Installation d'un switch Cisco</h1>
+
+            <h2 id="reinitialisation">Réinitialisation du switch</h2>
+            <p>
+                Nous avons dû réinitialiser notre switch car une ancienne configuration était déjà présente et nous empéchait d'atteindre nos objectifs.<br>
+                <ol>
+                    <li>Allumer le switch, quand l'icône de rouage clignote : appuyez sur le bouton gris</li><br>
+                    Le prompt devient alors "switch : "<br><br>
+                    <li>On exécute les commandes : "SWITCH_IGNORE_STARTUP_CFG = 1" puis "boot flash:packages.conf" et le switch reboot</li>
+                    <li>Une fois le switch allumé on tape : "wr mem" puis  "reload"</li>
+                    <li>On refait l'étape 1 et on exécute la commande "SWITCH_IGNORE_STARTUP_CFG = 0" puis "boot flash:packages.conf" et le switch reboot une fois de plus</li><br>
+                    Le switch est alors réinitialisé.
+                </ol>
+            </p>
+
+            <h2 id="vlan">Configuration des VLANs</h2>
+            <p>
+                Pour configurer les VLANs, on se connecte en console et on exécute les commandes suivantes :<br>
+                <div class="commandes">
+                    Switch#conf t <br>
+                    Switch#vlan 100<br>
+                    Switch#name …<br>
+                    Switch#exit<br>
+                </div>
+            </p>
+
+            <h2 id="ports">Attribution des ports</h2>
+            <p>
+                Après avoir créé les VLANs, on fait en sorte que les ports soient dans le VLAN que l'on a choisi.<br>
+                Pour cela on exécute les commandes suivantes :<br>
+                <div class="commandes">
+                    Switch#conf t <br>
+                    Switch(config)#int < nom de l'interface > <br>
+                    Switch(config-int)#switchport mode access<br>
+                    Switch(config-int)#switchport access vlan 100<br>
+                    Switch(config-int)#no shut<br>
+                    Switch(config-int)#exit<br>
+                </div>
+                <br><br>
+                On peut vérifier que les ports sont bien configurés en exécutant la commande : "show vlan brief"
+            </p>      
+            
+            <h2 id="trunk">Mode Trunk</h2>
+            <p>Pour permettre le routage inter-vlan, nous devons mettre un port du switch en mode trunk. <br>
+                On le fait avec les commandes suivantes :
+            </p>
+
+            <div class="commandes">
+                Switch#conf t <br>
+                Switch(config)#int < nom de l'interface > <br>
+                Switch(config-int)#switchport mode trunk<br>
+                Switch(config-int)#switchport trunk allowed vlan all<br>
+                Switch(config-int)#no shut<br>
+                Switch(config-int)#exit<br>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
