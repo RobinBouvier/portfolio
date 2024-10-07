@@ -27,5 +27,4 @@
             setcookie("tab_recto", "", time() - 60); 
         ?>
     </body>
-
 </html>
